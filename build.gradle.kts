@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.1")
+    testImplementation("io.mockk:mockk:1.12.0")
 }
 
 tasks.test {

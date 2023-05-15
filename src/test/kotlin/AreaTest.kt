@@ -1,5 +1,6 @@
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import io.kotest.assertions.throwables.shouldThrow
 
 class AreaTest : FunSpec({
@@ -40,6 +41,17 @@ class AreaTest : FunSpec({
             val area = Area()
             val marks = area.getAllLocationMarks()
             marks[0].count() shouldBe Area.Y_RANGE.count()
+        }
+    }
+
+    context("moveCharacter") {
+        test("Characterが移動できていること") {
+            val area = Area()
+            val character = area.getAvatar()
+            val oldPosition = character.currentPosition()
+            area.moveCharacter()
+            character.currentPosition() shouldNotBe oldPosition
+
         }
     }
 })

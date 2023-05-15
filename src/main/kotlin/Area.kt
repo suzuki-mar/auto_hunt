@@ -1,7 +1,6 @@
-
-class Area {
+class Area() {
     private val allLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
-
+    private val avatar: Avatar = Avatar()
     init {
         for (i in X_RANGE) {
             val locationLines = mutableListOf<Location>()
@@ -33,6 +32,10 @@ class Area {
         return lineLocations.find { it.x == position.x && it.y == position.y }
     }
 
+    fun getAvatar(): Avatar {
+        return avatar
+    }
+
     fun getAllLocationMarks(): List<List<Mark>> {
         val allLocationMarks = mutableListOf<List<Mark>>()
 
@@ -48,6 +51,10 @@ class Area {
         }
 
         return allLocationMarks
+    }
+
+    fun moveCharacter() {
+        avatar.move()
     }
 
 }
