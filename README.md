@@ -19,3 +19,7 @@ Auto Huntは、Kotlinの学習を深めるためのプロジェクトです。
 | Position | 位置 | Locationの位置をX,Yで表しているもの|
 | Character | キャラクター | 自動的に宝物を探すために動く |
 | Treasure | 宝物| Characterが見つけるもの |
+
+## 実行結果
+https://github.com/suzuki-mar/auto_hunt/assets/155013/f556f563-eb70-4f2f-ae09-697979874275
+
