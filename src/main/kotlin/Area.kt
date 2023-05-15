@@ -33,4 +33,21 @@ class Area {
         return lineLocations.find { it.x == position.x && it.y == position.y }
     }
 
+    fun getAllLocationMarks(): List<List<Mark>> {
+        val allLocationMarks = mutableListOf<List<Mark>>()
+
+        for (i in X_RANGE) {
+            val locationMarks = mutableListOf<Mark>()
+
+            for (j in Y_RANGE) {
+                val position = Position(i, j)
+                val location = findLocationByPosition(position)
+                locationMarks.add(location!!.mark)
+            }
+            allLocationMarks.add(locationMarks)
+        }
+
+        return allLocationMarks
+    }
+
 }
