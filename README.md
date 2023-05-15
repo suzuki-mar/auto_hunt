@@ -17,7 +17,7 @@ Auto Huntは、Kotlinの学習を深めるためのプロジェクトです。
 | Location | 場所 | エリア内の1マス |
 | Mark | 印 | Locationの状態を表している キャラクターや宝物などの種類ごとに異なる表記をしている|
 | Position | 位置 | Locationの位置をX,Yで表しているもの|
-| Character | キャラクター | 自動的に宝物を探すために動く |
+| Avator | アバター | 自動的に宝物を探すために動く |
 | Treasure | 宝物| Characterが見つけるもの |
 
 ## 実行結果
