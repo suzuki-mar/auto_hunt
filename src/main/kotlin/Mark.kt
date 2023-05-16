@@ -3,5 +3,11 @@ enum class Mark {
         override fun toString(): String {
             return " "
         }
+    },
+
+    AVATAR {
+        override fun toString(): String {
+            return "A"
+        }
     }
 }

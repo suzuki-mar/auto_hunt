@@ -63,7 +63,6 @@ class AreaTest : FunSpec({
 //                    実際にどれぐらいでエラーになるかわからないため最大値を設定している
                     for (i in 0 until Int.MAX_VALUE) {
                         area.moveCharacter()
-                        println(area.getAvatar().currentPosition())
                     }
                 }
 
@@ -72,4 +71,15 @@ class AreaTest : FunSpec({
         }
 
     }
+
+    context("getAvatar") {
+        test("Avatarが取得できて所属しているローケーションも取得できること") {
+            val area = Area()
+            val avatar =  area.getAvatar()
+            val location = area.findLocationByPosition(avatar.currentPosition())
+            location!!.mark shouldBe Mark.AVATAR
+        }
+    }
+
+
 })

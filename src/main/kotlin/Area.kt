@@ -2,12 +2,19 @@ class Area() {
     private val allLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
     private val avatar: Avatar = Avatar()
     init {
+        println()
+
         for (i in X_RANGE) {
             val locationLines = mutableListOf<Location>()
 
             for (j in Y_RANGE) {
                 val position = Position(i, j)
-                locationLines.add(Location(position))
+                val location = Location(position)
+                if (avatar.currentPosition() == position) {
+                    location.update(avatar)
+                }
+
+                locationLines.add(location)
             }
             allLocations.add(Pair(locationLines, i))
         }
