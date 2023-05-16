@@ -45,13 +45,31 @@ class AreaTest : FunSpec({
     }
 
     context("moveCharacter") {
-        test("Characterが移動できていること") {
-            val area = Area()
-            val character = area.getAvatar()
-            val oldPosition = character.currentPosition()
-            area.moveCharacter()
-            character.currentPosition() shouldNotBe oldPosition
+        context("領域内の移動ができていること") {
+            test("Characterが移動できていること") {
+                val area = Area()
+                val avatar = area.getAvatar()
+                val oldPosition = avatar.currentPosition()
+                area.moveCharacter()
+                avatar.currentPosition() shouldNotBe oldPosition
 
+            }
         }
+
+        context("領域外の移動をした場合") {
+            test("Characterが移動できていること") {
+                val area = Area()
+                shouldThrow<AreaBoundaryExceededException> {
+//                    実際にどれぐらいでエラーになるかわからないため最大値を設定している
+                    for (i in 0 until Int.MAX_VALUE) {
+                        area.moveCharacter()
+                        println(area.getAvatar().currentPosition())
+                    }
+                }
+
+
+            }
+        }
+
     }
 })

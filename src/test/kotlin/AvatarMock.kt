@@ -6,7 +6,11 @@ class AvatarMock(private var direction:Direction) : IAvatar {
     }
 
     override fun move() {
-        position = direction.createNewPosition(currentPosition())
+        val newPosition = direction.createNewPosition(currentPosition())
+
+        Area.checkBoundaryExceeded(newPosition)
+
+        position = newPosition
     }
 
     override fun currentPosition():Position {

@@ -17,6 +17,17 @@ class Area() {
         val X_RANGE = 1..10
         val Y_RANGE = 1..10
 
+//        外部からも使用するので、companion objectに定義している
+        fun checkBoundaryExceeded(position: Position) {
+            if (X_RANGE.contains(position.x).not()) {
+                throw AreaBoundaryExceededException("Xが領域を超えています")
+            }
+
+            if (Y_RANGE.contains(position.y).not()) {
+                throw AreaBoundaryExceededException("Yが領域を超えています")
+            }
+        }
+
     }
 
     fun findLocationByPosition(position: Position): Location? {
@@ -55,6 +66,9 @@ class Area() {
 
     fun moveCharacter() {
         avatar.move()
+        checkBoundaryExceeded(avatar.currentPosition())
     }
+
+
 
 }
