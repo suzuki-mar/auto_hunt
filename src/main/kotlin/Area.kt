@@ -1,26 +1,9 @@
 class Area {
-    private val allLocations: List<Pair<List<Location>, Int>>
+    private var allLocations: List<Pair<List<Location>, Int>>
     private val avatar: Avatar = Avatar()
 
     init {
-        val tmpAllLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
-
-        for (i in X_RANGE) {
-            val locationLines = mutableListOf<Location>()
-
-            for (j in Y_RANGE) {
-                val position = Position(i, j)
-                val location = Location(position)
-                if (avatar.currentPosition() == position) {
-                    location.update(avatar)
-                }
-
-                locationLines.add(location)
-            }
-            tmpAllLocations.add(Pair(locationLines, i))
-        }
-
-        allLocations = tmpAllLocations.toList()
+        allLocations = createAllLocations()
     }
 
     companion object {
@@ -77,6 +60,28 @@ class Area {
     fun moveCharacter() {
         avatar.move()
         checkBoundaryExceeded(avatar.currentPosition())
+        allLocations = createAllLocations()
+    }
+
+    private fun createAllLocations():List<Pair<List<Location>, Int>> {
+        val tmpAllLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
+
+        for (i in X_RANGE) {
+            val locationLines = mutableListOf<Location>()
+
+            for (j in Y_RANGE) {
+                val position = Position(i, j)
+                val location = Location(position)
+                if (avatar.currentPosition() == position) {
+                    location.update(avatar)
+                }
+
+                locationLines.add(location)
+            }
+            tmpAllLocations.add(Pair(locationLines, i))
+        }
+
+        return tmpAllLocations.toList()
     }
 
 

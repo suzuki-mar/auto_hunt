@@ -1,6 +1,12 @@
 fun main(args: Array<String>) {
     val area = Area()
+    printMarksString(area)
+
+    area.moveCharacter()
+    printMarksString(area)
+}
+
+fun printMarksString(area: Area) {
     val allMarks = area.getAllLocationMarks()
-    val marksString = allMarks.joinToString("\n")
-    println(marksString)
+    println("${allMarks.joinToString("\n")}\n--------------------------\n")
 }
