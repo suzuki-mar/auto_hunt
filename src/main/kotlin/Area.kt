@@ -12,13 +12,26 @@ class Area {
 
 //        外部からも使用するので、companion objectに定義している
         fun checkBoundaryExceeded(position: Position) {
-            if (X_RANGE.contains(position.x).not()) {
-                throw AreaBoundaryExceededException("Xが領域を超えています")
+            if (!canMoveX(position)) {
+                throw AreaBoundaryExceededException("Xが領域を超えています:${position.x}")
             }
 
-            if (Y_RANGE.contains(position.y).not()) {
-                throw AreaBoundaryExceededException("Yが領域を超えています")
+            if (!canMoveY(position)) {
+                throw AreaBoundaryExceededException("Yが領域を超えています:${position.y}")
             }
+        }
+
+
+        fun isWithinBounds(position: Position):Boolean {
+            return canMoveX(position) && canMoveY(position)
+        }
+
+        private fun canMoveX(position: Position): Boolean {
+            return X_RANGE.contains(position.x)
+        }
+
+        private fun canMoveY(position: Position): Boolean {
+            return Y_RANGE.contains(position.y)
         }
 
     }
@@ -58,8 +71,18 @@ class Area {
     }
 
     fun moveCharacter() {
-        avatar.move()
+        var newPosition = Direction.random().createNewPosition(avatar.currentPosition())
+//        これぐらい回せば領域外には行かない
+        for(i in 0 until 1000) {
+            if (isWithinBounds(newPosition)) {
+                break
+            }
+            newPosition = Direction.random().createNewPosition(avatar.currentPosition())
+        }
+
+        avatar.move(newPosition)
         checkBoundaryExceeded(avatar.currentPosition())
+
         allLocations = createAllLocations()
     }
 

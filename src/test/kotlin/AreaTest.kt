@@ -45,30 +45,48 @@ class AreaTest : FunSpec({
     }
 
     context("moveCharacter") {
-        context("領域内の移動ができていること") {
-            test("Characterが移動できていること") {
-                val area = Area()
-                val avatar = area.getAvatar()
-                val oldPosition = avatar.currentPosition()
+        test("Characterが移動できていること") {
+            val area = Area()
+            val avatar = area.getAvatar()
+            val oldPosition = avatar.currentPosition()
+            area.moveCharacter()
+            avatar.currentPosition() shouldNotBe oldPosition
+
+        }
+
+        test("領域外には移動しないこと") {
+            val area = Area()
+            for (i in 0 until 1000) {
                 area.moveCharacter()
-                avatar.currentPosition() shouldNotBe oldPosition
+            }
+        }
+    }
 
+    context("isWithinBounds") {
+        context("Xのチェック") {
+            test("移動できる場合はTrue") {
+                val position = Position(Area.X_RANGE.last, 1)
+                Area.isWithinBounds(position) shouldBe true
+            }
+
+            test("移動できない場合はfalse") {
+                val position = Position(Area.X_RANGE.last + 1, 1)
+                Area.isWithinBounds(position) shouldBe false
             }
         }
 
-        context("領域外の移動をした場合") {
-            test("Characterが移動できていること") {
-                val area = Area()
-                shouldThrow<AreaBoundaryExceededException> {
-//                    実際にどれぐらいでエラーになるかわからないため最大値を設定している
-                    for (i in 0 until Int.MAX_VALUE) {
-                        area.moveCharacter()
-                    }
-                }
+        context("Yのチェック") {
+            test("移動できる場合はTrue") {
+                val position = Position(1, Area.Y_RANGE.last)
+                Area.isWithinBounds(position) shouldBe true
+            }
 
-
+            test("移動できない場合はfalse") {
+                val position = Position(1, Area.Y_RANGE.last + 1)
+                Area.isWithinBounds(position) shouldBe false
             }
         }
+
 
     }
 
