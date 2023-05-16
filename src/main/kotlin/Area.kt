@@ -1,8 +1,9 @@
-class Area() {
-    private val allLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
+class Area {
+    private val allLocations: List<Pair<List<Location>, Int>>
     private val avatar: Avatar = Avatar()
+
     init {
-        println()
+        val tmpAllLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
 
         for (i in X_RANGE) {
             val locationLines = mutableListOf<Location>()
@@ -16,8 +17,10 @@ class Area() {
 
                 locationLines.add(location)
             }
-            allLocations.add(Pair(locationLines, i))
+            tmpAllLocations.add(Pair(locationLines, i))
         }
+
+        allLocations = tmpAllLocations.toList()
     }
 
     companion object {
