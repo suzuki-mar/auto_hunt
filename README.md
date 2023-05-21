@@ -25,5 +25,7 @@ Auto Huntは、Kotlinの学習を深めるためのプロジェクトです。
 | Treasure | 宝物| Characterが見つけるもの |
 
 ## 実行結果
-https://github.com/suzuki-mar/auto_hunt/assets/155013/f556f563-eb70-4f2f-ae09-697979874275
+https://github.com/suzuki-mar/auto_hunt/assets/155013/861b9f22-2e7d-40a0-af06-026ae598201d
+
+
 
