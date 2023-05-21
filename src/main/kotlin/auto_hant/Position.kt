@@ -1,3 +1,5 @@
+package auto_hant
+
 data class Position(val x: Int, val y: Int) {
     companion object {
         fun createRandomPosition(): Position {

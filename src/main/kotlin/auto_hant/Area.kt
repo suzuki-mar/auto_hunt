@@ -1,4 +1,7 @@
-class Area {
+package auto_hant
+import IArea
+
+class Area: IArea {
     private var allLocations: List<Pair<List<Location>, Int>>
     private val avatar: Avatar = Avatar()
 
@@ -49,11 +52,11 @@ class Area {
         return lineLocations.find { it.x == position.x && it.y == position.y }
     }
 
-    fun getAvatar(): Avatar {
+    override fun getAvatar(): Avatar {
         return avatar
     }
 
-    fun getAllLocationMarks(): List<List<Mark>> {
+    override fun getAllLocationMarks(): List<List<Mark>> {
         val allLocationMarks = mutableListOf<List<Mark>>()
 
         for (i in X_RANGE) {
@@ -70,7 +73,7 @@ class Area {
         return allLocationMarks
     }
 
-    fun moveCharacter() {
+    override fun moveCharacter() {
         var newPosition = Direction.random().createNewPosition(avatar.currentPosition())
 //        これぐらい回せば領域外には行かない
         for(i in 0 until 1000) {

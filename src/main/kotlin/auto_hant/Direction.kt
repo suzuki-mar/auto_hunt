@@ -1,3 +1,5 @@
+package auto_hant
+
 enum class Direction(val value: Int) {
     RIGHT(1) {
         override fun createNewPosition(oldPosition: Position): Position {

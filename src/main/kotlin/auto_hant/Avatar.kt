@@ -1,3 +1,5 @@
+package auto_hant
+
 class Avatar {
 
     private var position: Position = Position.createRandomPosition()
