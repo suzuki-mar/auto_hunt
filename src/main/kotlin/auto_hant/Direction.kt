@@ -1,5 +1,7 @@
 package auto_hant
 
+import auto_hant.bounds.Position
+
 enum class Direction(val value: Int) {
     RIGHT(1) {
         override fun createNewPosition(oldPosition: Position): Position {

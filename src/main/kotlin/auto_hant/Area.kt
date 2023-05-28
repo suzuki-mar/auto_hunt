@@ -1,50 +1,32 @@
 package auto_hant
 
+import auto_hant.bounds.Bounds
+import auto_hant.bounds.Position
+
 class Area {
     private var allLocations: List<Pair<List<Location>, Int>>
     private val avatar: Avatar = Avatar()
+    private val bounds = Bounds()
 
     init {
         allLocations = createAllLocations()
     }
 
-    companion object {
-        val X_RANGE = 1..10
-        val Y_RANGE = 1..10
+    fun x_range(): IntRange {
+        return bounds.x_range()
+    }
 
-//        外部からも使用するので、companion objectに定義している
-        fun checkBoundaryExceeded(position: Position) {
-            if (!canMoveX(position)) {
-                throw AreaBoundaryExceededException("Xが領域を超えています:${position.x}")
-            }
-
-            if (!canMoveY(position)) {
-                throw AreaBoundaryExceededException("Yが領域を超えています:${position.y}")
-            }
-        }
-
-
-        fun isWithinBounds(position: Position):Boolean {
-            return canMoveX(position) && canMoveY(position)
-        }
-
-        private fun canMoveX(position: Position): Boolean {
-            return X_RANGE.contains(position.x)
-        }
-
-        private fun canMoveY(position: Position): Boolean {
-            return Y_RANGE.contains(position.y)
-        }
-
+    fun y_range(): IntRange {
+        return bounds.y_range()
     }
 
     fun findLocationByPosition(position: Position): Location? {
-        if (position.x > X_RANGE.last) {
-            throw IllegalArgumentException("Positionのxが最大値より大きかったです　指定した値${position.x} 最大値${X_RANGE.last}}")
+        if (position.x > x_range().last) {
+            throw IllegalArgumentException("Positionのxが最大値より大きかったです　指定した値${position.x} 最大値${x_range().last}}")
         }
 
-        if (position.y > Y_RANGE.last) {
-            throw IllegalArgumentException("Positionのyが最大値より大きかったです　指定した値${position.y} 最大値${Y_RANGE.last}}")
+        if (position.y > y_range().last) {
+            throw IllegalArgumentException("Positionのyが最大値より大きかったです　指定した値${position.y} 最大値${y_range().last}}")
         }
 
         val lineLocations = allLocations[position.x -1].first
@@ -58,10 +40,10 @@ class Area {
      fun getAllLocationMarks(): List<List<Mark>> {
         val allLocationMarks = mutableListOf<List<Mark>>()
 
-        for (i in X_RANGE) {
+        for (i in x_range()) {
             val locationMarks = mutableListOf<Mark>()
 
-            for (j in Y_RANGE) {
+            for (j in y_range()) {
                 val position = Position(i, j)
                 val location = findLocationByPosition(position)
                 locationMarks.add(location!!.mark)
@@ -76,14 +58,14 @@ class Area {
         var newPosition = Direction.random().createNewPosition(avatar.currentPosition())
 //        これぐらい回せば領域外には行かない
         for(i in 0 until 1000) {
-            if (isWithinBounds(newPosition)) {
+            if (bounds.isWithinBounds(newPosition)) {
                 break
             }
             newPosition = Direction.random().createNewPosition(avatar.currentPosition())
         }
 
         avatar.move(newPosition)
-        checkBoundaryExceeded(avatar.currentPosition())
+        bounds.checkBoundaryExceeded(avatar.currentPosition())
 
         allLocations = createAllLocations()
     }
@@ -91,10 +73,10 @@ class Area {
     private fun createAllLocations():List<Pair<List<Location>, Int>> {
         val tmpAllLocations: MutableList<Pair<List<Location>, Int>> = mutableListOf()
 
-        for (i in X_RANGE) {
+        for (i in x_range()) {
             val locationLines = mutableListOf<Location>()
 
-            for (j in Y_RANGE) {
+            for (j in y_range()) {
                 val position = Position(i, j)
                 val location = Location(position)
                 if (avatar.currentPosition() == position) {
@@ -108,7 +90,5 @@ class Area {
 
         return tmpAllLocations.toList()
     }
-
-
 
 }

@@ -1,5 +1,7 @@
 package auto_hant
 
+import auto_hant.bounds.Position
+
 class Location(position: Position) {
     val x: Int = position.x
     val y: Int = position.y
