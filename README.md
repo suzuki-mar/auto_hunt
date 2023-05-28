@@ -23,6 +23,7 @@ Auto Huntは、Kotlinの学習を深めるためのプロジェクトです。
 | Position | 位置 | Locationの位置をX,Yで表しているもの|
 | Avator | アバター | 自動的に宝物を探すために動く |
 | Treasure | 宝物| Characterが見つけるもの |
+|Simulator | シュミレーター | Areaが存在する仮想世界 |
 
 ## 実行結果
 https://github.com/suzuki-mar/auto_hunt/assets/155013/861b9f22-2e7d-40a0-af06-026ae598201d
